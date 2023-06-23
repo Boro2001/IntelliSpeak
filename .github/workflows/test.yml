@@ -5,6 +5,7 @@ on:
     branches:
       - master
 
+  workflow_dispatch:
 
 jobs:
 
@@ -29,9 +30,9 @@ jobs:
       - name: Docker Build and Push
         if: success()
         env:
-          DOCKER_HUB_USERNAME: ${{ $DOCKER_HUB_USERNAME }}
+          DOCKER_HUB_USERNAME: ${{ DOCKER_HUB_USERNAME }}
           DOCKER_HUB_TOKEN:  ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
         run: |
           docker build -t $DOCKER_HUB_USERNAME/intellispeak:latest frontend/
-          echo $DOCKER_HUB_TOKEN | docker login docker.io -u $DOCKER_HUB_USERNAME --password-stdin
-          docker push $DOCKER_HUB_USERNAME/intellispeak:latest
+          echo $DOCKER_HUB_TOKEN | docker login docker.io -u ${{ DOCKER_HUB_USERNAME }} --password-stdin
+          docker push ${{ $DOCKER_HUB_USERNAME }}/intellispeak:latest
