@@ -34,5 +34,5 @@ jobs:
           DOCKER_HUB_TOKEN:  ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
         run: |
           docker build -t $DOCKER_HUB_USERNAME/intellispeak:latest frontend/
-          echo $DOCKER_HUB_TOKEN | docker login docker.io -u $DOCKER_HUB_USERNAME --password-stdin
+          echo $DOCKER_HUB_TOKEN | docker login docker.io -u ${{ $DOCKER_HUB_USERNAME }} --password-stdin
           docker push $DOCKER_HUB_USERNAME/intellispeak:latest
