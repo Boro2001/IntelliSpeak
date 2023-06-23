@@ -3,7 +3,7 @@ name: test_build_image_and_push_to_docker_hub
 on:
   push:
     branches:
-      - master
+      - main
 
 jobs:
 
