@@ -28,7 +28,7 @@ jobs:
       - name: Docker Build and Push
         if: success()
         env:
-          DOCKER_HUB_USERNAME: ${{ DOCKER_HUB_USERNAME }}
+          DOCKER_HUB_USERNAME: ${{ secrets.DOCKER_HUB_USERNAME }}
           DOCKER_HUB_TOKEN:  ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
         run: |
           docker build -t ${{ DOCKER_HUB_USERNAME }}/intellispeak:latest frontend/
