@@ -26,9 +26,9 @@ jobs:
           ssh -i ~/.ssh/id_rsa.pem ${{ secrets.USERNAME }}@${{ secrets.HOST }} << EOF
             sudo yum update
             sudo su
-            docker stop $(docker ps -q)
-            docker rm -f $(docker ps -aq)
-            docker rmi -f $(docker images -q)
+            docker stop \$(docker ps -q)
+            docker rm -f \$(docker ps -aq)
+            docker rmi -f \$(docker images -q)
             docker pull boro2001/intellispeak:latest
             docker run -d -p 80:80 --name intellispeak-service --restart always boro2001/intellispeak:latest
           EOF
