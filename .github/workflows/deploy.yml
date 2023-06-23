@@ -1,0 +1,38 @@
+name: buildAndTest
+
+on:
+  push:
+    branches:
+      - master
+
+  workflow_dispatch:
+
+jobs:
+
+  buildAndTest:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+
+      - name: Build and test Frontend
+        run: |
+          cd frontend/
+          npm install
+          docker build .
+
+      - name: Connect to server and execute commands
+        run: |
+          mkdir -p ~/.ssh/
+          echo -n "${{ secrets.PEM_KEY }}" > ~/.ssh/id_rsa.pem
+          chmod 600 ~/.ssh/id_rsa.pem
+          ssh-keyscan -H <your_server_hostname> >> ~/.ssh/known_hosts
+
+          # Connect to server and execute commands
+          ssh -i ~/.ssh/id_rsa.pem <your_server_username>@<your_server_hostname> "whoami"
