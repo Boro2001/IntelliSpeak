@@ -1,0 +1,6 @@
+<button (click)="this.generate()">generate</button>
+
+<h2>Parent Component</h2>
+<input [(ngModel)]="message" placeholder="Enter a message">
+<p>Message from child: {{ childMessage }}</p>
+<app-chat-bubble [(childMessage)]="message"></app-chat-bubble>
