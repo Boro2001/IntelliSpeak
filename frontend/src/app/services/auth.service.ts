@@ -80,4 +80,9 @@ export class AuthService {
       alert(err.message);
     })
   }
+
+  isLoggedIn(): boolean {
+    const user = localStorage.getItem('token');
+    return user != null;
+  }
 }
